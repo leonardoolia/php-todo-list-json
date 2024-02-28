@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="css/style.css">
 
     <!-- Javascript -->
-    <script defer src="script/script.js"></script>
+    <script defer src="js/script.js"></script>
 </head>
 
 <body>
@@ -33,14 +33,16 @@
                 <div class="col-12 d-flex flex-column align-items-center">
                     <h1 class="text-center">ToDo List</h1>
                     <ul class="list-group w-100">
-                        <li class="list-group-item">First task</li>
+                        <li v-for="task in tasks" :key="task.id" class="list-group-item">
+                            <span :class="{'text-decoration-line-through': task.done}">{{task.text}}</span>s
+                        </li>
                     </ul>
                 </div>
             </div>
 
-            <form class="d-flex flex-column align-items-center mt-3">
-                <input type="text" v-model="newTodo" class="form-control mb-2" placeholder="Add a new task" required>
-                <button type="submit" class="btn btn-primary">Add</button>
+            <form @submit.prevent="addTask()" class="d-flex flex-column align-items-center mt-3">
+                <input v-model="newTask" type="text" class="form-control mb-2" placeholder="Add a new task" required>
+                <button type="submit" class="btn btn-primary">Add new task</button>
             </form>
         </div>
     </main>
